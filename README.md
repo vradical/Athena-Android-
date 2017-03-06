@@ -3,73 +3,68 @@ Athena is a crowd-based safety mobile application that focuses on the prevention
 
 # 1. User Story #
 
-* Users can be warned of dangerous area. (Covered)
-* Users can make use of the application without connectivity.
-* Users can still know dangerous area without connectivity.
-* Users can still track their location without connectivity.
-* Users can still use high alert without connectivity
-* Users can still trigger and send out emergency alert without connectivity.
-* Users can be on high alert to be ready for any form of assault. (Covered)
-* High alert should be able to activate the emergency alert if the users has no response. (Covered)
-* Users can easily trigger the emergency alert at anywhere with just 1 step. (Covered)
-* Users can make use of the emergency alert to scare off the attacker. (Covered)
-* The system can automatic can capture and send out vital information in the case of an assault. (Covered)
-* Users can pre-set the numbers of NOK in the application. (Covered)
-* The system can automatic send out help signals to nearby users. (Covered)
-* Users can cancel off the emergency alert. (Covered)
-* Users can choose between to cancel because of false alarm or they are safe again. (Covered)
-* Users will have access to vital information such as nearest hospital or local authority numbers when in need. (Covered)
-* Users can edit the time and range of the tracking based on their preference. (Covered)
+To keep track of what the users expect from our mobile application. Admin perspective will be considered in the later stage due to potential conflict against the viewing and accessing of users tracking information. 
+User Stories [Completed]
+
+*	Users can be on high alert to be ready for any form of assault. 
+*	High alert should be able to activate the emergency alert if the users has no response. 
+*	Users can make use of the emergency alert to scare off the attacker. 
+*	Users can pre-set the numbers of NOK in the application.
+*	Users can cancel off the emergency alert. 
+*	Users can choose between to cancel because of false alarm or they are safe again. 
+*	Users will have access to vital information such as nearest hospital or local authority numbers when in need.
+*	Users can edit the time and range of the tracking based on their preference. (range no longer included
+*	Users can see if area is dangerous.
+*	Users can record and alert others if the area is dangerous.
+*	Users can report false reporting of danger area.
+*	Users can still use partial app of the users.
+*	The system can automatic send out help signals to nearby users. 
+*	The system can automatic can capture and send out vital information in the case of an assault.
+*	Users can easily trigger the emergency alert at anywhere with just 1 step. 
+*	Users can still make use of the app at offline mode.
+
+User Stories [Cancelled]
+*	Users can make use of the application without connectivity.
+*	Users can still know dangerous area without connectivity.
+*	Users can still track their location without connectivity.
+*	Users can still use high alert without connectivity
+*	Users can still trigger and send out emergency alert without connectivity.
 
 # 2. Features #
 
+The features of this application are separated into 3 different areas that focus on pre-incidents (prevention measures), during-incidents (emergency features) and post-incidents (reporting and help).
+
 ## 2.1. Prevention ##
 ### 2.1.1. Danger Zone ###
-* Able to view last incident within the area (To know the level of crime?)
-* Danger level is calculate through an algorithm based on N level(1 <= N <= 10)
-* Algorithm is based on number emergency activated at specific location
-* The records is based on N number of activation, with each activation to be N+1 level.
-* After each month without an incident, N will be N-1.
-* Map will be displayed in the form of geographic information system (layers of red overlapping,   symbolising the dangerous level)
-* Notification will be given to the user when they have enter a more dangerous area (based on the periodic tracking)
+The danger zones are circles shown in the Google map. Those areas are mark with past records of emergency activation (red circle) and reported danger zone (yellow circle). Danger zone will have additional information that provides the users with more information of why the zone is dangerous. Based on the current location, the app will be able to identify to danger level to the user (number of overlap). Danger zone can also be reported once by each user. Once a zone has been reported more than 10 times, it will be taken off the map. 
+
+To prevent the overloading of information, the team has created the loading of danger area such that only information within 20km (a country size, most than enough to pre-planned journey) of the user and in happened in the recent half a year will be loaded. These setting and the idea of a reported danger zone are decided through users’ feedback session with the targeted audience. (Females of age 20-40).
 
 ### 2.1.2. Tracking System ###
-* Similar to taxi system, the tracking is done periodically by both range and time. (Can be adjust by users through advance option)
-* Different mode for tracking (impt?)
+The tracking system will automatically track the user periodically. The interval of each location tracking can be adjusted through advance option in the setting page. Interval are split into 3 different type, mainly standard tracking, alert mode tracking and emergency tracking. To ensure that the tracking will not be affected by the existing of the app, the tracking are construct using alarm manager and service. This ensures that tracking will still be running in the background when the users are not using the app. The tracking will only stop when the users kill the process of the application.
 
 ### 2.1.3. Help Information Display ###
-* Help information such as nearest hospital and police will be given to the users in this page
+Help information page will always display the route to nearest hospital or police station and important local authority contact information. The help information will be generated based on the last track location of the user. This information are gathered personally by the team and not done through API. Information is also compared with various government website to ensure the accuracy.
 
-### 2.1.4. FB Sharing ###
-* Allow user to share the app with their friends.
+### 2.1.4. •	Contact Management ###
+Allow users to manage their contacts that will be contacted during emergency.
 
 ## 2.2. Emergency ##
 ### 2.2.1. High Alert Mode ###
-* Tracking are done more frequently.
-* Vibration to prompt if users are okay with each have 1 min duration for user to answer.
-* If users has failed to response 2 times consecutively, emergency alert will be triggered.
+Tracking are done more frequently. For a user set interval, the application will also prompt a check to the users through vibration. The check is to be answered by the user within user set count down. If the user failed to response 2 times consecutively, emergency alert will be triggered.
 
 ### 2.2.2. Emergency Mode ###
-* 1 step to activate the emergency mode (HOW?)
-* Send alert via SMS and email to preset NOK with no limitation (with country priority).
-* Location are tracked and send
-* Voice Recording are activated for 5-30 sec? and send
-* Photo will be taken and send as well.
-* Local authority will be provided in the mail for fast response.
-* SOS alert will be send to nearby users within a specific range (To be release at later stage - when there are community)
-* Siren will be activated with speaker mode on loudest volume
-* In the case of no connectivity,
-* detailed are stored until connectivity available again and send out.
-* last recorded location send via sms. (or can android detect location without internet?)
+The emergency mode can be activated by sliding up on the main activity or by the high alert. Upon activation, the emergency mode will track current location of the user and send the recorded information to the NOK via email and SMS (with local authority information). At the same time, siren will also be activated with speaker mode on loudest volume. To de-activate the emergency, user need to key in passcode that they have set for the application. (Passcode is suggested by the users’ feedback session, in the case if the attacker wants to de-activate the alarm)
 
 ## 2.3. Post-Incident ##
-* Cancellation of Emergency Mode
-* Cancel due to False alarm
-* Notify NOK and nearby ppl that it was a false alarm
-* Record of the activation to be deleted.
-* Cancel due to Safe again
-* Information of nearest hospital and local authority will be provided.
-* System will not notify NOK and nearby ppl (users might still need help).
+### 2.3.1. Cancellation of Emergency Mode ###
+When the user is safe again, user will be directed to the help information to seek for help.
+
+### 2.3.2. Cancel due to False alarm ###
+When the user declares that it is false alarm, user will be redirect back to main page. The emergency will not be considered in GIS record.
+
+### 2.3.3. Emergency List Page ###
+Allow users to view their emergency record that they have activated before. Each emergency record will have the tracking information throughout the activation of the emergency. This allows the users to pass the information clearly to the authority in the case if they need it. Time and date in this page are all set to the time zone of the activated. For example, first activation is at Hong Kong, the time shown will be Hong Kong time of the activation and if second activation is at Singapore, time shown on that record will be Singapore time.
 
 # 3. Stages of Development #
 
